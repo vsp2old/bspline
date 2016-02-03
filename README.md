@@ -22,7 +22,61 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. summary
+
+  Bspline interpolation - Ruby libraly
+
+2. usage in ruby script file
+
+require 'bspline'
+include BSPLINE
+
+obj = Bspline.new(..)
+..
+
+3. class
+
+Module 'BSPLINE' has 3 classes.
+
+  3.1 Basic interpolation without boundary condition
+  
+BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j)
+
+  3.2 Interpolation with boundary condition by additional data points
+
+BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j, [[xn+1,yn+1],..,[xn+d,yn+d]])
+
+  3.3 Interpolation with boundary condition by differential value
+
+BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j, [[xn+1,yn+1],..,[xn+d,yn+d]], [b1,..,bd])
+
+  3.4 Interpolation with period boundary condition
+
+BSPLINE::Tspline.new([[x0,y0],..,[xn,yn]], j)
+
+  3.5 Interpolation of smoothing spline
+
+BSPLINE::Gspline.new([[x0,y0],..,[xn,yn]], j, g)
+
+4. Calculate interporation
+
+  4.1 Calculate interpolation
+  
+	self[x]	#=> y
+	self[x1,...,xi] #=> [y1,...yi]
+
+  4.2 Calculate interpolation with differential value
+
+    self.value(x, b = 0)
+
+  4.3 Calculate interpolation with integrated value
+
+    self.sekibun(x)
+
+  4.4 calculate an interpolation for graphs
+
+    self.plot([x0,...,xn], d, b = 0) { |x,y| ... }
+
 
 ## Development
 
