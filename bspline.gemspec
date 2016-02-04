@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["vsp2old"]
   spec.email         = ["yatcho@hotmail.co.jp"]
 
-  spec.description   = %q{Bspline Linked List implemented in C-Extensions}
-  spec.summary       = %q{Bspline Linked List implemented in C-Extensions}
+  spec.description   = %q{Bspline interpolation libraly implemented in C-Extensions}
+  spec.summary       = %q{Bspline interpolation libraly implemented in C-Extensions}
   spec.homepage      = ""
 
   spec.extensions    = %w[ext/bspline/extconf.rb]

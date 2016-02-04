@@ -77,6 +77,7 @@ BSPLINE::Gspline.new([[x0,y0],..,[xn,yn]], j, g)
 
     self.plot([x0,...,xn], d, b = 0) { |x,y| ... }
 
+See example/*.rb
 
 ## Development
 
