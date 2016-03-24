@@ -1,5 +1,5 @@
 #! /usr/local/bin/ruby
-require 'bspline.so'
+require 'bspline'
 include BSPLINE
 
 fdata = [[0.0],[0.1],[0.2],[0.3],[0.4],[0.5],[0.6],[0.7],[0.8],[0.9],[1.0]]
@@ -21,4 +21,22 @@ s = bp.plot(vv, Dp, -1) do |a,b|
 	printf "% .10f % .10f\n", a, b
 end
 
-STDERR.puts bp.sekibun(1)
+#STDERR.puts bp.sekibun(1)
+require "gnuplot"
+ 
+Gnuplot.open do |gp|
+	Gnuplot::Plot.new( gp ) do |plot|
+		plot.title  'Sample'
+		plot.ylabel 'Y'
+		plot.xlabel 'X'
+ 
+		x = vv.map {|v| v[0]}
+		y = vv.map {|v| v[1]}
+ 
+		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
+			ds.with = "lines"
+			ds.linewidth = 2
+			ds.notitle
+		end
+	end
+end

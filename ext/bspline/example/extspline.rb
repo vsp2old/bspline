@@ -1,5 +1,5 @@
 #! /usr/local/bin/ruby
-require 'bspline.so'
+require 'bspline'
 include BSPLINE
 
 =begin
@@ -57,3 +57,28 @@ s = tp.plot(vv, 10, Jbn) do |u, v|
 	printf "%8.5f, % f\n", u, v
 end
 # STDERR.puts s
+require "gnuplot"
+ 
+Gnuplot.open do |gp|
+	Gnuplot::Plot.new( gp ) do |plot|
+		plot.title  'Jacobi'
+		plot.ylabel 'Y'
+		plot.xlabel 'X'
+ 
+		x = vv.map {|v| v[0]}
+		y = vv.map {|v| v[1]}
+ 
+		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
+			ds.with = "lines"
+			ds.linewidth = 2
+			ds.notitle
+		end
+
+		y = x.map {|v| tp.value(v, 1)}
+ 
+		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
+			ds.with = "lines"
+			ds.title = "Differential"
+		end
+	end
+end

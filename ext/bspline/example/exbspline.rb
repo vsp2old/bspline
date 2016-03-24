@@ -1,5 +1,5 @@
 #! /usr/local/bin/ruby
-require 'bspline.so'
+require 'bspline'
 include BSPLINE
 
 =begin
@@ -56,3 +56,28 @@ s = bp.plot(vv, Dp, Jbn) do |a,b|
 	printf ", % f\n", bp.sekibun(a)
 end
 # STDERR.puts s
+require "gnuplot"
+ 
+Gnuplot.open do |gp|
+	Gnuplot::Plot.new( gp ) do |plot|
+		plot.title  'sec2(x)'
+		plot.ylabel 'Y'
+		plot.xlabel 'X'
+ 
+		x = vv.map {|v| v[0]}
+		y = vv.map {|v| v[1]}
+ 
+		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
+			ds.with = "lines"
+			ds.linewidth = 2
+			ds.notitle
+		end
+
+		y = x.map {|v| bp.sekibun(v)}
+ 
+		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
+			ds.with = "lines"
+			ds.title = "Integral"
+		end
+	end
+end
