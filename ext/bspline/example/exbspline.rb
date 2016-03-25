@@ -4,12 +4,12 @@ include BSPLINE
 
 =begin
 
-Basic interpolation without boundary condition
+# Basic interpolation without boundary condition
 
 【Module】		BSPLINE
 【Class】 		Bspline
 【Method】
-（1）new			Initialize
+（1）new		Initialize
 	obj = Bspline.new([[x1,y1],...,[xn,yn]], j)
 	:1 list of data points.
 	:2 dimension
@@ -18,19 +18,18 @@ Basic interpolation without boundary condition
 	obj[x0,...,xi]
 （3）value		Calculate interpolation with differential value
 	obj.value(x, b = 0)
-	b:order of differential value （optional）
+	b: order of differential value （optional）
 （4）sekibun		Calculate interpolation with integrated value
-	obj.sekibun(a)		:result is a indefinite integral of point a
-	obj.sekibun(a,b)	:result is a definite integral of section [a,b]
+	obj.sekibun(a)		: result is a indefinite integral of point a
+	obj.sekibun(a,b)	: result is a definite integral of section [a,b]
 （5）plot
 	obj.plot([x0,...,xn], d, b = 0) { |x,y| ... }
 	:1 list of data points
 	:2 number of the division
 	:3 order of differential value （optional）
 =end
-#
+
 puts "# Interpolation of the sec2(x) function"
-#
 ad = [
 	[-4.0, 1.34095e-3],[-3.6, 2.98189e-3],[-3.2, 6.62420e-3],[-2.8, 1.46827e-2],
 	[-2.4, 3.23838e-2],[-2.0, 7.06508e-2],[-1.6, 1.50527e-1],[-1.2, 3.05020e-1],
@@ -55,7 +54,7 @@ s = bp.plot(vv, Dp, Jbn) do |a,b|
 	printf "% .2f, % f", a, b
 	printf ", % f\n", bp.sekibun(a)
 end
-# STDERR.puts s
+# Draw Graph
 require "gnuplot"
  
 Gnuplot.open do |gp|
@@ -63,18 +62,14 @@ Gnuplot.open do |gp|
 		plot.title  'sec2(x)'
 		plot.ylabel 'Y'
 		plot.xlabel 'X'
- 
-		x = vv.map {|v| v[0]}
+ 		x = vv.map {|v| v[0]}
 		y = vv.map {|v| v[1]}
- 
 		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
 			ds.with = "lines"
 			ds.linewidth = 2
 			ds.notitle
 		end
-
 		y = x.map {|v| bp.sekibun(v)}
- 
 		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
 			ds.with = "lines"
 			ds.title = "Integral"

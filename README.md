@@ -91,7 +91,7 @@ See example/*.rb
 
 ###  5.2 Interpolation with boundary condition by additional data points
 
-    [[x1,y1],..,[xn,yn]].bspline(order: j, condition:[[xn+1,yn+1],..,[xn+d,yn+d]])
+    [[x1,y1],..,[xn,yn]].bspline(order: j, condition: [[xn+1,yn+1],..,[xn+d,yn+d]])
 
 ###  5.3 Interpolation with boundary condition by differential value
 

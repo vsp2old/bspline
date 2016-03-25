@@ -4,12 +4,12 @@ include BSPLINE
 
 =begin
 
-Interpolation with boundary condition by additional data points
+# Interpolation with boundary condition by additional data points
 
 【Module】		BSPLINE
 【Class】 		Bspline
 【Method】
-（1）new			Initialize
+（1）new		Initialize
 	obj = Bspline.new([[x1,y1],...,[xn,yn]], j, [[xn+1,yn+1],...,[xn+d,yn+d]])
 	:1 list of data points.
 	:2 dimension
@@ -19,10 +19,10 @@ Interpolation with boundary condition by additional data points
 	obj[x0,...,xi]
 （3）value		Calculate interpolation with differential value
 	obj.value(x, b = 0)
-	b:order of differential value （optional）
+	b: order of differential value （optional）
 （4）sekibun		Calculate interpolation with integrated value
-	obj.sekibun(a)		:result is a indefinite integral of point a
-	obj.sekibun(a,b)	:result is a definite integral of section [a,b]
+	obj.sekibun(a)		: result is a indefinite integral of point a
+	obj.sekibun(a,b)	: result is a definite integral of section [a,b]
 （5）plot
 	obj.plot([x0,...,xn], d, b = 0) { |x,y| ... }
 	:1 list of data points
@@ -57,11 +57,9 @@ def plotsub(bp, vp, dp, b = 0)
 	end
 	return s;
 end
-#
+
 puts "# Interpolation of the Bessel function"
-#
-ad = [[0.0, 1.0    ],[0.8, 0.84629],[1.6, 0.45540],[2.0, 0.22389],
-      [2.4, 0.00251],[3.2,-0.32019],[4.0,-0.39715]]
+ad = [[0.0, 1.0    ],[0.8, 0.84629],[1.6, 0.45540],[2.0, 0.22389],[2.4, 0.00251],[3.2,-0.32019],[4.0,-0.39715]]
 ac = [[0.4, 0.96040],[1.2, 0.67113],[2.8,-0.18504],[3.6,-0.39177]]
 Jbn = ARGV[0].to_i
 Dp = 10
@@ -80,26 +78,22 @@ end
 s = plotsub(bp, vv, Dp, Jbn) do |a, b|
 	printf "% .2f, % f\n", a, b
 end
-# STDERR.puts s
+# Draw Graph
 require "gnuplot"
- 
+
 Gnuplot.open do |gp|
 	Gnuplot::Plot.new( gp ) do |plot|
 		plot.title  'Bessel'
 		plot.ylabel 'Y'
 		plot.xlabel 'X'
- 
 		x = vv.map {|v| v[0]}
 		y = vv.map {|v| v[1]}
- 
 		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
 			ds.with = "lines"
 			ds.linewidth = 2
 			ds.notitle
 		end
-
 		y = x.map {|v| bp.sekibun(v)}
- 
 		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
 			ds.with = "lines"
 			ds.title = "Integral"
