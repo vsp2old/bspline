@@ -44,66 +44,66 @@ Module 'BSPLINE' has 3 classes.
 
 ###  3.1 Basic interpolation without boundary condition
   
-    BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j)   
+    BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j)
 
 ###  3.2 Interpolation with boundary condition by additional data points
 
-    BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j, [[xn+1,yn+1],..,[xn+d,yn+d]])   
+    BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j, [[xn+1,yn+1],..,[xn+d,yn+d]])
 
 ###  3.3 Interpolation with boundary condition by differential value
 
-    BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j, [[xn+1,yn+1],..,[xn+d,yn+d]], [b1,..,bd])   
+    BSPLINE::Bspline.new([[x1,y1],..,[xn,yn]], j, [[xn+1,yn+1],..,[xn+d,yn+d]], [b1,..,bd])
 
 ###  3.4 Interpolation with period boundary condition
 
-    BSPLINE::Tspline.new([[x0,y0],..,[xn,yn]], j)   
+    BSPLINE::Tspline.new([[x0,y0],..,[xn,yn]], j)
 
 ###  3.5 Interpolation of smoothing spline
 
-    BSPLINE::Gspline.new([[x0,y0],..,[xn,yn]], j, g)   
+    BSPLINE::Gspline.new([[x0,y0],..,[xn,yn]], j, g)
 
 ## 4. Calculate interporation
 
 ###  4.1 Calculate interpolation
-  
+
 	self[x]	#=> y   
-	self[x1,...,xi] #=> [y1,...yi]   
+	self[x1,...,xi] #=> [y1,...yi]
 
 ###  4.2 Calculate interpolation with differential value
 
-    self.value(x, b = 0)   
+    self.value(x, b = 0)
 
 ###  4.3 Calculate interpolation with integrated value
 
-    self.sekibun(x)   
+    self.sekibun(x)
 
 ###  4.4 calculate an interpolation for graphs
 
-    self.plot([x0,...,xn], d, b = 0) { |x,y| ... }   
+    self.plot([x0,...,xn], d, b = 0) { |x,y| ... }
 
 See example/*.rb   
 
 ## 5. Bspline object defined with keyword arguments
 
 ###  5.1 Basic interpolation without boundary condition
-  
-    [[x1,y1],..,[xn,yn]].bspline(order: j)   
+
+    [[x1,y1],..,[xn,yn]].bspline(order: j)
 
 ###  5.2 Interpolation with boundary condition by additional data points
 
-    [[x1,y1],..,[xn,yn]].bspline(order: j, condition:[[xn+1,yn+1],..,[xn+d,yn+d]])   
+    [[x1,y1],..,[xn,yn]].bspline(order: j, condition:[[xn+1,yn+1],..,[xn+d,yn+d]])
 
 ###  5.3 Interpolation with boundary condition by differential value
 
-    [[x1,y1],..,[xn,yn]].bspline(order: j, condition: [[xn+1,yn+1],..,[xn+d,yn+d]], differential_order: [b1,..,bd])      
+    [[x1,y1],..,[xn,yn]].bspline(order: j, condition: [[xn+1,yn+1],..,[xn+d,yn+d]], differential_order: [b1,..,bd])
 
 ###  5.4 Interpolation with period boundary condition
 
-    [[x0,y0],..,[xn,yn]].tspline(order: j)   
+    [[x0,y0],..,[xn,yn]].tspline(order: j)
 
 ###  5.5 Interpolation of smoothing spline
 
-    [[x0,y0],..,[xn,yn]].gspline(order: j, smoothing_factor: g)   
+    [[x0,y0],..,[xn,yn]].gspline(order: j, smoothing_factor: g)
 
 # Development
 
