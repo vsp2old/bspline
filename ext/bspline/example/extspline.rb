@@ -40,7 +40,7 @@ xy = [
 Jbn = ARGV[0].to_i
 Dp = 10
 
-tp = Tspline.new(xy, 5)
+tp = xy.tspline order:5
 
 vv = []
 xy.each do |p|

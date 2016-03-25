@@ -45,7 +45,7 @@ D = [1, 2, 1, 2]
 Jbn = ARGV[0].to_i
 Dp = 10
 
-dp = Bspline.new(xy, 5, C, D);
+dp = xy.bspline order:5, condition:C, differential_order:D
 
 vv = []
 xy.each do |p|

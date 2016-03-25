@@ -48,7 +48,7 @@ for i in 0...gsize
 	xi += xd
 end
 
-gsp = Gspline.new(a, j, g)
+gsp = a.gspline order:j, smoothing_factor:g
 
 #gsp.each_with_index {|x,i| p [i, x] }
 vv = []
@@ -70,7 +70,6 @@ Gnuplot.open do |gp|
  
 		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
 			ds.with = "lines"
-			ds.linewidth = 2
 			ds.notitle
 		end
 
@@ -78,6 +77,7 @@ Gnuplot.open do |gp|
  
 		plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
 			ds.with = "lines"
+			ds.linewidth = 2
 			ds.title = "Smoothing"
 		end
 	end

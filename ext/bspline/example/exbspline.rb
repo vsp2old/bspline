@@ -39,7 +39,7 @@ ad = [
 	[ 2.8, 1.46827e-2],[ 3.2, 6.62420e-3],[ 3.6, 2.98189e-3],[ 4.0, 1.34095e-3]]
 Jbn = ARGV[0].to_i
 Dp = 10
-bp = Bspline.new(ad, 5)
+bp = ad.bspline order:5
 vv = []
 ad.each do |p|
 	printf "% .2f, %f\r\n", p[0], p[1]

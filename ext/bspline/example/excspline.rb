@@ -65,7 +65,7 @@ ad = [[0.0, 1.0    ],[0.8, 0.84629],[1.6, 0.45540],[2.0, 0.22389],
 ac = [[0.4, 0.96040],[1.2, 0.67113],[2.8,-0.18504],[3.6,-0.39177]]
 Jbn = ARGV[0].to_i
 Dp = 10
-bp = Bspline.new(ad, 5, ac)
+bp = ad.bspline order:5, condition:ac
 vv = []
 ad.each do |p, q|
 	printf "% .2f, % f\n", p, q
