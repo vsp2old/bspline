@@ -55,7 +55,7 @@ end
 # Draw Graph
 require "gnuplot"
  
-Gnuplot.open do |gp|
+File.open( "exgspline.plt", "w") do |gp|
 	Gnuplot::Plot.new( gp ) do |plot|
 		plot.title  'Sample'
 		plot.ylabel 'Y'

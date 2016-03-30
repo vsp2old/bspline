@@ -57,7 +57,7 @@ end
 # Draw Graph
 require "gnuplot"
  
-Gnuplot.open do |gp|
+File.open( "exbspline.plt", "w") do |gp|
 	Gnuplot::Plot.new( gp ) do |plot|
 		plot.title  'sec2(x)'
 		plot.ylabel 'Y'

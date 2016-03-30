@@ -81,7 +81,7 @@ end
 # Draw Graph
 require "gnuplot"
 
-Gnuplot.open do |gp|
+File.open( "excspline.plt", "w") do |gp|
 	Gnuplot::Plot.new( gp ) do |plot|
 		plot.title  'Bessel'
 		plot.ylabel 'Y'

@@ -58,7 +58,7 @@ end
 # Draw Graph
 require "gnuplot"
 
-Gnuplot.open do |gp|
+File.open( "exdspline.plt", "w") do |gp|
 	Gnuplot::Plot.new( gp ) do |plot|
 		plot.title  'sin(x)'
 		plot.ylabel 'Y'
